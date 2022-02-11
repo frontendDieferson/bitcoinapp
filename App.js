@@ -18,7 +18,7 @@ function url(qtdDays) {
   const listLastDays = qtdDays
   const end_date = 
   `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
-  date.setDate(data.setDate() - listLastDays)
+   date.setDate(date.getDate() - listLastDays)
   const start_date = 
   `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
   return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
@@ -43,12 +43,10 @@ async function getPriceCoinsGraphic(url) {
   let responseG = await fetch(url)
   let returnApiG = await responseG.json()
   let selectListQuotationsG = returnApiG.bpi
-  const queryCoinsList = Object.keys(selectListQuotationsG).map((key)=> {
-    return {
-      valor: selectListQuotationsG[key],
-    }
+  const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
+    return selectListQuotationsG[key]
   })
-  let dataG = queryCoinsList()
+  let dataG = queryCoinsListG()
   return dataG
 }
 
@@ -57,20 +55,26 @@ export default function App() {
   const [coinsGraphicList, setCoinsGraphicList] = useState([0])
   const [days, setDays] = useState(30)
   const [updateData, setUpdateData] = useState(true)
+  const [price, setPrice] = useState()
 
   function updateDay(number) {
     setDays(number)
     setUpdateData(true)
   }
-
+  
+  function priceCotation(){
+    setPrice(coinsGraphicList.pop())
+  }
 
   useEffect(() => {
     getListCoins(url(days)).then((data) => {
       setCoinsList(data)
     })
+    
     getPriceCoinsGraphic(url(days)).then((dataG) => {
       setCoinsGraphicList(dataG)
     })
+    priceCotation();
     if (updateData) {
       setUpdateData(false)
     }
@@ -86,10 +90,10 @@ export default function App() {
         barStyle='light-content'
       />
       
-      <CurrentPrice />
+      <CurrentPrice lastCotation={price} />
       <HistoryGraphic infoDataGraphic={coinsGraphicList} />
       <QuotationsList
-      filterDay={updateData}
+      filterDay={updateDay}
       listTransactions={coinsList}
       />
       <QuotationItems />
@@ -104,7 +108,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#202020',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Platform.OS === "android" ? 40: 0,

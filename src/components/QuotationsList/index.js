@@ -16,27 +16,31 @@ export default function QuotationsList(props) {
             >
                 <Text style={styles.textButtonQuery}>7 Dias</Text>
             </TouchableOpacity>
+
             <TouchableOpacity 
             style={styles.buttonQuery}
-            onPress={() =>{}}
+            onPress={() =>daysQuery(15)}
             >
                 <Text style={styles.textButtonQuery}>15 Dias</Text>
             </TouchableOpacity>
+
             <TouchableOpacity 
             style={styles.buttonQuery}
-            onPress={() =>{}}
+            onPress={() =>daysQuery(30)}
             >
                 <Text style={styles.textButtonQuery}>1 Mês</Text>
             </TouchableOpacity>
+
             <TouchableOpacity 
             style={styles.buttonQuery}
-            onPress={() =>{}}
+            onPress={() =>daysQuery(90)}
             >
                 <Text style={styles.textButtonQuery}>3 Meses</Text>
             </TouchableOpacity>
+
             <TouchableOpacity 
             style={styles.buttonQuery}
-            onPress={() =>{}}
+            onPress={() =>daysQuery(180)}
             >
                 <Text style={styles.textButtonQuery}>6 Meses</Text>
             </TouchableOpacity>
