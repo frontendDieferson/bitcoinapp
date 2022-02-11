@@ -13,11 +13,14 @@ function addZero(number) {
 }
 
 function url(qtdDays) {
-  const data = new Date();
+  const date = new Date();
   const listLastDays = qtdDays
-  const end_date
-  const start_date
-  return `https://api`
+  const end_date = 
+  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
+  date.setDate(data.setDate() - listLastDays)
+  const start_date = 
+  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
+  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
 
 }
 
