@@ -46,7 +46,7 @@ async function getPriceCoinsGraphic(url) {
   const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
     return selectListQuotationsG[key]
   })
-  let dataG = queryCoinsListG()
+  let dataG = queryCoinsListG
   return dataG
 }
 
@@ -100,8 +100,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-
 
 
 

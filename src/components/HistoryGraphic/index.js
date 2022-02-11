@@ -38,6 +38,10 @@ export default function HistoryGraphic(props) {
                     },
                 }}
                 bezier
+                style={{
+                    marginVertical: 8,
+                    borderRadius: 16
+                }}
             
             
             />
