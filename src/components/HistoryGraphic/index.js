@@ -26,8 +26,8 @@ export default function HistoryGraphic(props) {
                 withVerticalLabels={false}
                 chartConfig={{
                     backgroundColor: '#000',
-                    backgroundGradientFrom: "#232323",
-                    backgroundGradientTo: "#3F3F3F",
+                    backgroundGradientFrom: "#324AF8",
+                    backgroundGradientTo: "#FF5C37",
                     decimalPlaces: 0, // optional, defaults to 2dp
                     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

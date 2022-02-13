@@ -14,35 +14,35 @@ export default function QuotationsList(props) {
             style={styles.buttonQuery}
             onPress={() =>daysQuery(7)}
             >
-                <Text style={styles.textButtonQuery}>7 Dias</Text>
+                <Text style={styles.textButtonQuery}>7D</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
             style={styles.buttonQuery}
             onPress={() =>daysQuery(15)}
             >
-                <Text style={styles.textButtonQuery}>15 Dias</Text>
+                <Text style={styles.textButtonQuery}>15D</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
             style={styles.buttonQuery}
             onPress={() =>daysQuery(30)}
             >
-                <Text style={styles.textButtonQuery}>1 Mês</Text>
+                <Text style={styles.textButtonQuery}>1M</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
             style={styles.buttonQuery}
             onPress={() =>daysQuery(90)}
             >
-                <Text style={styles.textButtonQuery}>3 Meses</Text>
+                <Text style={styles.textButtonQuery}>3M</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
             style={styles.buttonQuery}
             onPress={() =>daysQuery(180)}
             >
-                <Text style={styles.textButtonQuery}>6 Meses</Text>
+                <Text style={styles.textButtonQuery}>6M</Text>
             </TouchableOpacity>
         </View>
         <ScrollView style={styles.listQuotationBitcoins}>
