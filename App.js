@@ -1,102 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 
-import CurrentPrice from './src/components/CurrentPrice';
-import HistoryGraphic from './src/components/HistoryGraphic';
-import QuotationsList from './src/components/QuotationsList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function addZero(number) {
-  if(number <=9) {
-    return '0' + number
-  }
-  return number
-}
+import Preload from './src/Screens/Preload'
+import Home from './src/Screens/Home'
 
-function url(qtdDays) {
-  const date = new Date();
-  const listLastDays = qtdDays
-  const end_date = 
-  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
-   date.setDate(date.getDate() - listLastDays)
-  const start_date = 
-  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
 
-}
-
-async function getListCoins(url) {
-  let response = await fetch(url)
-  let returnApi = await response.json()
-  let selectListQuotations = returnApi.bpi
-  const queryCoinsList = Object.keys(selectListQuotations).map((key)=> {
-    return {
-      data: key.split("-").reverse().join("/"),
-      valor: selectListQuotations[key],
-    }
-  })
-  let data = queryCoinsList.reverse()
-  return data
-}
-
-async function getPriceCoinsGraphic(url) {
-  let responseG = await fetch(url)
-  let returnApiG = await responseG.json()
-  let selectListQuotationsG = returnApiG.bpi
-  const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
-    return selectListQuotationsG[key]
-  })
-  let dataG = queryCoinsListG
-  return dataG
-}
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [coinsList, setCoinsList] = useState([])
-  const [coinsGraphicList, setCoinsGraphicList] = useState([0])
-  const [days, setDays] = useState(30)
-  const [updateData, setUpdateData] = useState(true)
-  const [price, setPrice] = useState()
-
-  function updateDay(number) {
-    setDays(number)
-    setUpdateData(true)
-  }
   
-  function priceCotation(){
-    setPrice(coinsGraphicList.pop())
-  }
-
-  useEffect(() => {
-    getListCoins(url(days)).then((data) => {
-      setCoinsList(data)
-    })
-    
-    getPriceCoinsGraphic(url(days)).then((dataG) => {
-      setCoinsGraphicList(dataG)
-    })
-    priceCotation();
-    if (updateData) {
-      setUpdateData(false)
-    }
-
-  },[updateData])
-
-
   return (
-    <SafeAreaView style={styles.container}>
-     
-      <StatusBar 
-        backgroundColor='#FF5C37'
-        barStyle='light-content'
-      />
-      
-      <CurrentPrice lastCotation={price} />
-      <HistoryGraphic infoDataGraphic={coinsGraphicList} />
-      <QuotationsList
-      filterDay={updateDay}
-      listTransactions={coinsList}
-      />
-     
-    </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Preload'>
+            <Stack.Screen name='Preload' 
+            component={Preload} 
+            options={{
+             headerShown: false
+            }}
+           
+            />
+            <Stack.Screen 
+            name='Home' 
+            component={Home} 
+            options={{
+              headerShown: false
+             }}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>   
+   
   );
 }
 
